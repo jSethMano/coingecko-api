@@ -1,4 +1,4 @@
-const searchBox = document.querySelector(".search-bar");
+var searchBox = document.querySelector(".search-bar");
 const searchButton = document.getElementById("submit-btn");
 const searchContainer = document.querySelector(".search-result");
 
