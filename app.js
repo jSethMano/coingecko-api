@@ -1,4 +1,4 @@
-var searchBox = document.querySelector(".search-bar");
+const searchBox = document.querySelector(".search-bar");
 const searchButton = document.getElementById("submit-btn");
 const searchContainer = document.querySelector(".search-result");
 
@@ -13,14 +13,12 @@ var p = document.createElement("p");
 //     }
 // }
 
-var search = searchBox.value
-
 
 
 async function submitSearch () {
 
 //   refreshResultContainer(searchContainer);
- 
+var search = searchBox.value
     
 
     var response = await fetch('https://api.coingecko.com/api/v3/coins/'+search+'');
@@ -38,11 +36,11 @@ async function submitSearch () {
 
             fetchPrice();
 
-            
-
 }
 
 async function fetchPrice(){
+
+    var search = searchBox.value
     var response = await fetch ('https://api.coingecko.com/api/v3/simple/price?ids='+search+'&vs_currencies=php');
     var data = await response.json();
 
