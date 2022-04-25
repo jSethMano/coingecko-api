@@ -10,8 +10,10 @@
 <script src="./app.js" defer></script>
 <header>
     <div class="nav-bar">
-        <nav id="navigation">
+        <div class="logo">
             <h1>Crypto<span class="bold-letter">API</span></h1>
+        </div>
+        <nav id="navigation">
             <ul>
                 <li>Home</li>
                 <li>About</li>
@@ -21,17 +23,18 @@
 </header>
 <body>
 
-    <div class="search-container">
-      
-            <input type="text"  class="search-bar">
+    <div class="search-container">   
+        <div class="input-container">
+            <input onfocus=this.value="" type="text"  class="search-bar" autocapitalize="none" placeholder="What you're looking for?">
             <input type="submit" id="submit-btn" value="Search">
+        </div>
+           
         <div class="search-result">
-
+               
         </div>
     </div>
-
+    <h2>Trending Coins</h2>
     <div class="trending-container">
-        <h2>Trending Coins</h2>
 
         <!-- <div class="trending-content">
             <h3 id="coin-name">Bitcoin</h3>
