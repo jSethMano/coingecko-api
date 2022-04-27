@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="./style.css">
     <title>Cypto API</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" defer></script>
 <script src="./app.js" defer></script>
+<script src="./anim.js" defer></script>
+
 <header>
     <div class="nav-bar">
         <div class="logo">
@@ -15,13 +18,23 @@
         </div>
         <nav id="navigation">
             <ul>
-                <li>Home</li>
-                <li>About</li>
+                <li id="homeBtn">Home</li>
+                <li id="aboutBtn">About</li>
             </ul>
         </nav>
     </div>
+    <div class="hamburger-menu">
+        <span class="hamburger-btn"></span>
+        <span class="hamburger-btn"></span>
+        <span class="hamburger-btn"></span>
+    </div>
 </header>
 <body>
+
+    <dialog class="modal" id="modal">
+        <h1>About this project</h1>
+        <p>First mini project using API and Git version control system that was uploaded to Github Repo</p>
+    </dialog>
 
     <div class="search-container">   
         <div class="input-container">

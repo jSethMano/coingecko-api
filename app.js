@@ -43,6 +43,7 @@ async function fetchTrending() {
         
     }
 
+    
     // console.log(data.coins[0].item.price_btc)
     
 }
@@ -77,6 +78,7 @@ function showTrendingCoin(coinID, rank, btcPrice) {
 
     trendingParent.appendChild(div);
     div.setAttribute('class','coin-container');
+    div.setAttribute('id', 'coins')
     heading.textContent = contentOne.headingTextContent
     parag.textContent = contentOne.paragTextContent
     paragTwo.textContent = contentOne.priceTextContent
@@ -96,7 +98,6 @@ async function submitSearch () {
 
     searchBox.value = searchBox.value.toLowerCase();
     var search = searchBox.value;
-
 
     var response = await fetch('https://api.coingecko.com/api/v3/coins/'+search+'');
     var data = await response.json();
@@ -130,6 +131,8 @@ async function submitSearch () {
                     image.setAttribute("src", dataImage);
 
                     h1.append(span)
+
+                    
                 
                     // paragRank.textContent = JSON.parse(convertTextResultRank);
                     fetchRank();
@@ -155,7 +158,6 @@ async function fetchRank() {
     paragRank.textContent = convertTextResultRank;
 
     console.log(convertTextResultRank)
-
 }
  
 async function fetchPrice(){
@@ -178,6 +180,10 @@ async function fetchPrice(){
     let childElementsLength = searchContainer.childNodes.length;
     searchContainer.children = [];
 
+    searchContainer.children[2].classList.add("child-two");
+    searchContainer.children[3].classList.add("child-three");
+    searchContainer.children[4].classList.add("child-four");
+    searchContainer.children[5].classList.add("child-five");
     searchContainer.children[5].classList.toggle("price-placement");
     
     for (var i = 0; i < childElementsLength; i++){
@@ -185,12 +191,15 @@ async function fetchPrice(){
         let searchChildren = searchContainer.children[i];
         searchChildren.classList.toggle("center-div-items");
     }
+
+    
 }
 
 var newLabel = document.createElement("p");
 var newLabelTwo = document.createElement("p");
 
 function addLabel () {
+
 
     newLabel.textContent = "Philippine Peso Price / BTC"
     newLabelTwo.textContent = "Market Rank"
@@ -200,5 +209,27 @@ function addLabel () {
 }
 
 
+//MODAL TOGGLE SCRIPT
 
+const aboutBtn = document.getElementById("aboutBtn");
+const modal = document.getElementById("modal");
+const homeBtn = document.getElementById("homeBtn");
+
+homeBtn.addEventListener('click', () => {
+    location.reload();
+    searchBox.value = " ";
+    // searchBox.setAttribute("placeholder", "What you're looking for?");
+});
+
+aboutBtn.addEventListener('click', () => {
+    modal.showModal();
+
+})
+
+const hamburgerBtn = document.querySelector(".hamburger-menu")
+const navMenu = document.getElementById("navigation");
+
+hamburgerBtn.addEventListener('click', () => {
+    navMenu.style.display = "block"
+}, false)
 
