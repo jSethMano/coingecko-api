@@ -157,55 +157,62 @@ async function fetchRank() {
 
     paragRank.textContent = convertTextResultRank;
 
-    console.log(convertTextResultRank)
 }
  
 async function fetchPrice(){
 
-    var search = searchBox.value
-    var response = await fetch ('https://api.coingecko.com/api/v3/simple/price?ids='+search+'&vs_currencies=php');
-    var data = await response.json();
+    try{
 
-    let coinID = search;
-    let priceResult = document.createTextNode(data[coinID].php);
-    let convertTextResult = priceResult.nodeValue;
-
-    // console.log(convertTextResult)
-    // console.log(priceResult)
-    searchContainer.appendChild(p)
-    // p.textContent = "₱" + " " + convertTextResult;
-    p.textContent = currencyFormat.format(convertTextResult);
-
-
-    let childElementsLength = searchContainer.childNodes.length;
-    searchContainer.children = [];
-
-    searchContainer.children[2].classList.add("child-two");
-    searchContainer.children[3].classList.add("child-three");
-    searchContainer.children[4].classList.add("child-four");
-    searchContainer.children[5].classList.add("child-five");
-    searchContainer.children[5].classList.toggle("price-placement");
+        var search = searchBox.value
+        const response = await fetch ('https://api.coingecko.com/api/v3/simple/price?ids='+search+'&vs_currencies=php');
+        var data = await response.json();
     
-    for (var i = 0; i < childElementsLength; i++){
-        // console.log(searchContainer.children[i])
-        let searchChildren = searchContainer.children[i];
-        searchChildren.classList.toggle("center-div-items");
+        if(response.ok){
+            let coinID = search;
+            let priceResult = document.createTextNode(data[coinID].php);
+            let convertTextResult = priceResult.nodeValue;
+        
+            // console.log(convertTextResult)
+            // console.log(priceResult)
+            searchContainer.appendChild(p)
+            // p.textContent = "₱" + " " + convertTextResult;
+            p.textContent = currencyFormat.format(convertTextResult);
+        
+            let childElementsLength = searchContainer.childNodes.length;
+            searchContainer.children = [];
+        
+            searchContainer.children[2].classList.add("child-two");
+            searchContainer.children[3].classList.add("child-three");
+            searchContainer.children[4].classList.add("child-four");
+            searchContainer.children[5].classList.add("child-five");
+            searchContainer.children[5].classList.toggle("price-placement");
+            
+            for (var i = 0; i < childElementsLength; i++){
+                // console.log(searchContainer.children[i])
+                let searchChildren = searchContainer.children[i];
+            searchChildren.classList.toggle("center-div-items");
+                
+            }
+        }
+
+    } catch(error){
+
     }
+
 
     
 }
+
+console.log(fetchPrice());
 
 var newLabel = document.createElement("p");
 var newLabelTwo = document.createElement("p");
 
 function addLabel () {
-
-
     newLabel.textContent = "Philippine Peso Price / BTC"
     newLabelTwo.textContent = "Market Rank"
     searchContainer.appendChild(newLabel);
     searchContainer.appendChild(newLabelTwo);
-
 }
 
 
