@@ -102,67 +102,71 @@ async function submitSearch () {
     var response = await fetch('https://api.coingecko.com/api/v3/coins/'+search+'');
     var data = await response.json();
 
-            if(response.ok){
+    if(search.length === 0){
+        alert("PLEASE TYPE WHAT COIN YOU'RE LOOKING FOR");
+    } else {
+
+        if(response.ok){
             
-                let dataImage = data.image.small;
-                // let paragRank = document.createElement("h3");
-                
+              
+            // let paragRank = document.createElement("h3");
+                          
+                  let dataResult = JSON.stringify(data.name)
+                  let dataResultSymbol = JSON.stringify(data.symbol)
+            // let dataResultRank = JSON.stringify(data.market_cap_rank)
           
-                let dataResult = JSON.stringify(data.name)
-                let dataResultSymbol = JSON.stringify(data.symbol)
-                // let dataResultRank = JSON.stringify(data.market_cap_rank)
-    
-                let result = document.createTextNode(dataResult)
-                let resultSymbol = document.createTextNode(dataResultSymbol)
-                // let resultRank = document.createTextNode(dataResultRank)
-    
-                let convertTextResult = result.nodeValue;
-                let convertTextResultSymbol = resultSymbol.nodeValue;
-                let parsedResultSymbol = JSON.parse(convertTextResultSymbol);
-                // let convertTextResultRank = resultRank.nodeValue;
-                    searchContainer.append(h1, image);
-                    // searchContainer.appendChild(paragRank);
-                
-                    span.textContent = parsedResultSymbol;
-                
-                    h1.textContent = JSON.parse(convertTextResult);
-                    h1.style.fontSize = "20px";
-                    // const image = document.querySelector('.image-container');
-                    image.setAttribute("src", dataImage);
-
-                    h1.append(span)
-
-                    
-                
-                    // paragRank.textContent = JSON.parse(convertTextResultRank);
-                    fetchRank();
-                    fetchPrice();   
-                    addLabel();
-                   
-            }
+                  let result = document.createTextNode(dataResult)
+                  let resultSymbol = document.createTextNode(dataResultSymbol)
+            // let resultRank = document.createTextNode(dataResultRank)
+          
+                  let convertTextResult = result.nodeValue;
+                  let convertTextResultSymbol = resultSymbol.nodeValue;
+                  let parsedResultSymbol = JSON.parse(convertTextResultSymbol);
+            // let convertTextResultRank = resultRank.nodeValue;
+                searchContainer.append(h1, image);
+                // searchContainer.appendChild(paragRank);
+            
+                span.textContent = parsedResultSymbol;
+            
+                h1.textContent = JSON.parse(convertTextResult);
+                h1.style.fontSize = "20px";
+                // const image = document.querySelector('.image-container');
+                let dataImage = data.image.small;
+                image.setAttribute("src", dataImage);
+          
+                h1.append(span)
+          
+                fetchRank();
+                fetchPrice();   
+                addLabel();
+            //    return data;
+                          }
+    }    
 }
 
+// submitSearch()
+//     .then((data) => {
+//         let dataResultRank = JSON.stringify(data.market_cap_rank)
+//         let resultRank = document.createTextNode(dataResultRank)
+//         let convertTextResultRank = resultRank.nodeValue;
+//         searchContainer.appendChild(paragRank);
+//         paragRank.textContent = convertTextResultRank;
+//     })
+//     .then(fetchPrice());
+
 async function fetchRank() {
-
     let search = searchBox.value;
-
     var response = await fetch('https://api.coingecko.com/api/v3/coins/'+search+'');
     var data = await response.json();
-
     let dataResultRank = JSON.stringify(data.market_cap_rank)
     let resultRank = document.createTextNode(dataResultRank)
     let convertTextResultRank = resultRank.nodeValue;
-
     searchContainer.appendChild(paragRank);
-
     paragRank.textContent = convertTextResultRank;
-
 }
  
 async function fetchPrice(){
-
     try{
-
         var search = searchBox.value
         const response = await fetch ('https://api.coingecko.com/api/v3/simple/price?ids='+search+'&vs_currencies=php');
         var data = await response.json();
@@ -193,17 +197,13 @@ async function fetchPrice(){
             searchChildren.classList.toggle("center-div-items");
                 
             }
-        }
-
+        } 
     } catch(error){
-
+        console.log(`${error}`);
     }
-
 
     
 }
-
-console.log(fetchPrice());
 
 var newLabel = document.createElement("p");
 var newLabelTwo = document.createElement("p");
